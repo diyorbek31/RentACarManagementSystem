@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+Home - Rent Car System
+{% endblock %}
+{% block content %}
+<div class="container">
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3>Welcome to <strong>Rent Car System</strong></h3>
+            <p class="text-secondary mb-0">Manage cars, users, and services efficiently.</p>
+        </div>
+    </div>
+
+    <div class="row g-3">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Users</h5>
+                    <p class="card-text text-secondary">{{ user_count }} records</p>
+                    <a href="{% url 'users' %}" class="btn btn-primary">Manage Users</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Cars</h5>
+                    <p class="card-text text-secondary">{{ car_count }} records</p>
+                    <a href="{% url 'cars' %}" class="btn btn-primary">Manage Cars</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Services</h5>
+                    <p class="card-text text-secondary">{{ service_count }} records</p>
+                    <a href="{% url 'services' %}" class="btn btn-primary">Manage Services</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Bookings</h5>
+                    <p class="card-text text-secondary">{{ booking_count }} records</p>
+                    <a href="{% url 'booking_list' %}" class="btn btn-primary">Manage Bookings</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

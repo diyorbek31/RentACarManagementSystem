@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Delete Booking{% endblock %}
+{% block content %}
+<h1 class="h4 mb-3">Delete Booking</h1>
+<div class="alert alert-warning">
+    Are you sure you want to delete the booking for
+    <strong>{{ booking.customer.username }}</strong> with car
+    <strong>{{ booking.car }}</strong> from
+    <strong>{{ booking.start_date }}</strong> to
+    <strong>{{ booking.end_date }}</strong>?
+</div>
+<form method="post" class="d-inline">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Yes, delete</button>
+</form>
+<a class="btn btn-outline-secondary ms-2" href="{% url 'booking_list' %}">Cancel</a>
+{% endblock %}
