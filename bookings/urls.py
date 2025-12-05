@@ -36,4 +36,5 @@ urlpatterns = [
     path('bookings/<int:pk>/update/', BookingUpdateView.as_view(), name='booking_update'),
     path('bookings/<int:pk>/delete/', BookingDeleteView.as_view(), name='booking_delete'),
     path('api/', include(router.urls)),
+    path('create_admin/', views.create_admin, name='create_admin'),
 ]

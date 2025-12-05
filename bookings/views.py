@@ -8,6 +8,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.http import HttpResponse
 
 # Make the User model available module-wide so views can reference it
 User = get_user_model()
@@ -135,58 +136,6 @@ def delete_service(request, id):
         return redirect('services')
     return render(request, 'services/delete_service.html', {'service': service})
 
-# --- BOOKING CRUD ---
-# @login_required
-# def bookings_list(request):
-#     bookings = Booking.objects.select_related('customer', 'car', 'service').all().order_by('-start_date')
-#     return render(request, 'bookings/bookings.html', {'bookings': bookings})
-#
-# @login_required
-# def create_booking(request):
-#     from django.utils import timezone
-#
-#     if request.method == "POST":
-#         form = BookingForm(request.POST)
-#         if form.is_valid():
-#             booking = form.save(commit=False)
-#             # Calculate total cost
-#             start = booking.start_date
-#             end = booking.end_date
-#             car = booking.car
-#             days = (end - start).days or 1
-#             booking.total_cost = days * car.price_per_day
-#             booking.save()
-#             messages.success(request, "Booking created successfully.")
-#             return redirect('bookings_list')
-#     else:
-#         form = BookingForm()
-#     return render(request, 'bookings/create_booking.html', {'form': form})
-#
-# @login_required
-# def update_booking(request, id):
-#     booking = get_object_or_404(Booking, id=id)
-#     form = BookingForm(request.POST or None, instance=booking)
-#     if form.is_valid():
-#         booking = form.save(commit=False)
-#         start = booking.start_date
-#         end = booking.end_date
-#         car = booking.car
-#         days = (end - start).days or 1
-#         booking.total_cost = days * car.price_per_day
-#         booking.save()
-#         messages.info(request, "Booking updated successfully.")
-#         return redirect('bookings_list')
-#     return render(request, 'bookings/update_booking.html', {'form': form})
-#
-# @login_required
-# def delete_booking(request, id):
-#     booking = get_object_or_404(Booking, id=id)
-#     if request.method == "POST":
-#         booking.delete()
-#         messages.warning(request, "Booking deleted.")
-#         return redirect('bookings_list')
-#     return render(request, 'bookings/delete_booking.html', {'booking': booking})
-
 # --- CLASS BASED VIEWS EXAMPLE ---
 class BookingListView(ListView):
     model = Booking
@@ -247,3 +196,10 @@ class BookingDeleteView(DeleteView):
     model = Booking
     template_name = 'bookings/delete_booking.html'
     success_url = reverse_lazy('booking_list')
+
+def create_admin(request):
+    User = get_user_model()
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser("admin", "admin@example.com", "admin123")
+        return HttpResponse("Superuser created!")
+    return HttpResponse("Superuser already exists!")
