@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -92,18 +93,24 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # }
 import os
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DB_NAME', 'rentcar_db'),
+#         'USER': os.environ.get('DB_USER', 'admin'),
+#         'PASSWORD': os.environ.get('DB_PASSWORD', 'KFB9aqbbimzl73eop19g-a'),
+#         'HOST': os.environ.get('DB_HOST', 'dpg-d4pedushg0os73eop19g-a.render.com'),
+#         'PORT': os.environ.get('DB_PORT', '5432'),
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'rentcar_db'),
-        'USER': os.environ.get('DB_USER', 'admin'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'KFB9aqbbimzl73eop19g-a'),
-        'HOST': os.environ.get('DB_HOST', 'dpg-d4pedushg0os73eop19g-a.render.com'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,  # optional, for persistent connections
+        ssl_require=True   # recommended for Render PostgreSQL
+    )
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
