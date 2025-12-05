@@ -94,10 +94,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'rentcar_db',
-        'USER': 'postgres',
-        'PASSWORD': 'diyorbek',
+        'USER': 'admin',
+        'PASSWORD': 'KFB9aqbbimzl73F7Tv4q7FidN2W1w9cz',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': 'dpg-d4pedushg0os73eop19g-a',
     }
 }
 

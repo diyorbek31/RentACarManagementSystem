@@ -1,1 +1,2 @@
-web: gunicorn mysite.wsgi:application
+web: gunicorn spass.wsgi:application
+    
