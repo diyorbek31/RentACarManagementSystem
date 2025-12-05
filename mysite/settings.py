@@ -90,16 +90,19 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+import os
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rentcar_db',
-        'USER': 'admin',
-        'PASSWORD': 'KFB9aqbbimzl73F7Tv4q7FidN2W1w9cz',
-        'HOST': 'localhost',
-        'PORT': 'dpg-d4pedushg0os73eop19g-a',
+        'NAME': os.environ.get('DB_NAME', 'rentcar_db'),
+        'USER': os.environ.get('DB_USER', 'admin'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'KFB9aqbbimzl73eop19g-a'),
+        'HOST': os.environ.get('DB_HOST', 'dpg-d4pedushg0os73eop19g-a.render.com'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
